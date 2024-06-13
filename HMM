@@ -227,8 +227,21 @@ end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Player = game.Players.LocalPlayer
-local Window = OrionLib:MakeWindow({Name = "guess 𓂀", HidePremium = false, SaveConfig = true, IntroText = "Sleeper UI", ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "guess 推測", HidePremium = false, SaveConfig = true, IntroText = "guess 推測", ConfigFolder = "OrionTest"})
 
+OrionLib:MakeNotification({
+	Name = "Logged in!",
+	Content = "You are logged in as "..Player.Name.." ", 
+	Image = "rbxassetid://7733964719",
+	Time = 7
+})
+
+OrionLib:MakeNotification({
+	Name = "Hi.",
+	Content = "Made by sleep, enjoy!",
+	Image = "rbxassetid://7733752630",
+	Time = 7
+})
 local Tab = Window:MakeTab({
 	Name = "TSB Main",
 	Icon = "rbxassetid://7733960981",
