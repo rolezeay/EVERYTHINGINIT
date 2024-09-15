@@ -242,6 +242,101 @@ OrionLib:MakeNotification({
 	Image = "rbxassetid://7733752630",
 	Time = 7
 })
+
+local Tab = Window:MakeTab({
+	Name = "Sigma Hook",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "rizz"
+})
+
+Tab:AddButton({
+	Name = "Dondur Karakter (R)",
+	Callback = function()
+      		-- LocalScript placed in StarterPlayerScripts
+
+-- Reference to the Player and Services
+local player = game.Players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+
+-- Initialize variables
+local isFrozen = false
+
+-- Function to freeze the character
+local function freezeCharacter(character)
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart", 10)
+    local humanoid = character:WaitForChild("Humanoid", 10)
+
+    if humanoidRootPart and humanoid then
+        -- Anchor the HumanoidRootPart to freeze the character in place
+        humanoidRootPart.Anchored = true
+
+        -- Stop all current animations
+        for _, track in pairs(humanoid:GetPlayingAnimationTracks()) do
+            track:Stop()
+        end
+    end
+end
+
+-- Function to unfreeze the character
+local function unfreezeCharacter(character)
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart", 10)
+    if humanoidRootPart then
+        -- Unanchor the HumanoidRootPart to allow movement again
+        humanoidRootPart.Anchored = false
+    end
+end
+
+-- Function to toggle freeze/unfreeze
+local function toggleFreeze()
+    if player.Character then
+        isFrozen = not isFrozen
+        if isFrozen then
+            freezeCharacter(player.Character)
+        else
+            unfreezeCharacter(player.Character)
+        end
+    end
+end
+
+-- Listen for the "R" key press
+userInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if input.KeyCode == Enum.KeyCode.R and not gameProcessedEvent then
+        toggleFreeze()
+    end
+end)
+
+-- Ensure the state persists after respawn
+player.CharacterAdded:Connect(function(character)
+    runService.Heartbeat:Wait()  -- Wait for the character to fully load
+    if isFrozen then
+        freezeCharacter(character)
+    end
+end)
+
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Animasyon",
+	Callback = function()
+      		 local Animate = plr.Character.Animate
+        Animate.Disabled = true
+        StopAnim()
+        Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616111295"
+	    Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616113536"
+        Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
+        Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
+        Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=656117878"
+        plr.Character.Humanoid:ChangeState(3)
+	    Animate.Disabled = false
+  	end    
+})
+
 local Tab = Window:MakeTab({
 	Name = "TSB Main",
 	Icon = "rbxassetid://7733960981",
